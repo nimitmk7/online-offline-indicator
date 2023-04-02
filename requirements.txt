@@ -1,0 +1,5 @@
+Django== 3.2.13
+sqlparse==0.4.3
+redis==4.5.4
+pylint-django==2.0.12
+

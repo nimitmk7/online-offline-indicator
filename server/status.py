@@ -4,14 +4,13 @@ from setup import settings
 
 
 def get_user_status(user_id):
-    r = redis.Redis(host='localhost', port=6379, db=0)
-    last_heartbeat = r.get(user_id).decode()
-    if int(last_heartbeat) < (datetime.now().timestamp() - 30):
-        return "offline"
-    return "online"
+    redis_conn_pool_1 = settings.REDIS_CONN_POOL_1
+    r = redis.Redis(connection_pool=redis_conn_pool_1)
+    return r.exists(user_id) > 0
 
 
 def mark_user_online(user_id):
-    r = redis.Redis(host='localhost', port=6379, db=0)
+    redis_conn_pool_1 = settings.REDIS_CONN_POOL_1
+    r = redis.Redis(connection_pool=redis_conn_pool_1)
     now = datetime.now()
-    r.set(user_id, str(int(round(now.timestamp()))))
+    r.setex(user_id, settings.KEY_TTL_IN_SECONDS, str(int(round(now.timestamp()))))

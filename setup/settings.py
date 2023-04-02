@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import redis
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -64,12 +65,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'setup.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+# Redis settings
 
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
+KEY_TTL_IN_SECONDS = 60
+REDIS_CONN_POOL_1 = redis.ConnectionPool(host='localhost', port=6379, db=0)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

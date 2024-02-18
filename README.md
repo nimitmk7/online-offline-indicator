@@ -1,6 +1,5 @@
 # online-offline-indicator
-Basic implementation of online-offline indicator server
-
+Using Redis and server-client architecture to know the status(online/offline) of a user on a social media network.
 Requirements: Redis cluster on local, Python VE to run the Django server.
 
 **V0.1**
